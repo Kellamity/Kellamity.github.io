@@ -3,7 +3,7 @@ layout: default
 title: About me
 ---
 
-	<h1>{{ page.title }}</h1>
+## {{ page.title }}
 
 I am a software developer with a Bachelor of Information Technology - Games design and development.   I work in .NET development in Melbourne, Australia.
 
