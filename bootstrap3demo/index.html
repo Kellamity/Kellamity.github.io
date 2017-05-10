@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main page heading - My ASP.NET Application</title>
+    <link href="Content/bootstrap.css" rel="stylesheet"/>
+    <link href="Content/site.css" rel="stylesheet"/>
+
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Demo MVC Application - Bootstrap 3</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="~/">Return to Github page</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        
+<form  method="post">    
+    <div class="page-header">
+        <h1>Application form <small>with client side validation</small></h1>
+    </div>
+        <p class="lead">This is a demo of some basic form elements built in MVC’s razor view engine. Obviously this isn’t an MVC site I’m hosting here, but rather a static copy of what my demo site generates. This site uses Bootstrap 3 for styling, and jQuery validate for client side validation, which I have customised to use with Bootstrap classes.</p>
+    <h2>Application questions</h2>
+    <div class="progress">
+        <div id="progApplication" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+        </div>
+    </div>
+
+    <fieldset class="form-group">
+        <legend class="legend">
+            <label class="control-label" for="Question1">Radio buttons for boolean</label>
+        </legend>
+        <div class="radio">
+            <label><input data-val="true" data-val-required="Radio buttons for boolean is a required field please provide an answer" id="radQuestion1Yes" name="Question1" type="radio" value="True" />Yes</label>
+        </div>
+        <div class="radio">
+            <label><input id="radQuestion1No" name="Question1" type="radio" value="False" />No</label>
+        </div>
+        <span class="field-validation-valid" data-valmsg-for="Question1" data-valmsg-replace="true" role="alert"></span>
+        <div aria-live="assertive" class="alert alert-info" id="divQuestion1Info">
+            <p><span class="glyphicon glyphicon-info-sign"></span><strong>Information!</strong></p>
+            <p>This is an information message. I have a script that can hide and show this depending on what value is selected above. It works in a similar way to the jQuery validation plugin using the data attributes on the element. Once I have made some more improvements to it I will put it on Github.</p>
+        </div>
+    </fieldset>
+
+ <fieldset class="form-group">
+        <legend class="control-label">
+            Radio buttons for string
+        </legend>
+        <div class="radio">
+            <label><input data-val="true" data-val-required="Radio buttons for string is a required field please provide an answer" id="radQuestion2Option1" name="Question2" type="radio" value="Option1" />Option 1</label>
+        </div>
+        <div class="radio">
+            <label><input id="radQuestion2Option2" name="Question2" type="radio" value="Option2" />Option 2</label>
+        </div>
+        <div class="radio">
+            <label><input id="radQuestion2Option3" name="Question2" type="radio" value="Option3" />Option 3</label>
+        </div>
+        <div class="radio">
+            <label><input id="radQuestion2Option4" name="Question2" type="radio" value="Option4" />Option 4</label>
+        </div>
+        <span class="field-validation-valid" data-valmsg-for="Question2" data-valmsg-replace="true" role="alert"></span>
+    </fieldset>
+    <fieldset class="form-group">
+        <legend>
+            These questions are a group
+        </legend>
+        <div class="form-group">
+            <label class="control-label" for="Question3">Input box</label>
+            <input class="form-control" data-val="true" data-val-required="Input box is a required field please provide an answer" id="Question3" name="Question3" type="text" value="" />
+            <span class="help-block">Example input to help user</span>
+            <span class="field-validation-valid" data-valmsg-for="Question3" data-valmsg-replace="true" role="alert"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="Question4">Dropdown box</label>
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Dropdown
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="form-group" role="group" aria-labelledby="lblQuestion5">
+            <label class="control-label" id="lblQuestion5">Group instead of fieldset</label>
+            <span class="help-block">I don't want to use a legend because I want my radio button group to have a label that matches the labels of the other elements. This is a div with a role of group which should still be accessible.</span>
+            <div class="radio">
+                <label><input data-val="true" data-val-required="Group instead of fieldset is a required field please provide an answer" id="radIsQuestion5True" name="Question5" type="radio" value="True" />True</label>
+            </div>
+            <div class="radio">
+                <label><input id="radIsQuestion5False" name="Question5" type="radio" value="False" />False</label>
+            </div>
+            <span class="field-validation-valid" data-valmsg-for="Question5" data-valmsg-replace="true" role="alert"></span>
+            <div aria-live="assertive" class="alert alert-warning" data-warnmsg-for="Question5" data-warnmsg-trigger="" id="divQuestion5Warning"><p><span class="glyphicon glyphicon-alert"></span><strong>Warning!</strong></p><p>Warning message to user, the selection you just made has triggered this extra thing for you to read.</p></div>
+        </div>
+    </fieldset>
+    <div class="form-group">
+        <label for="sel1" class="control-label legend">This control has a label that looks like the fieldset legends <span class="small text-muted">Optional</span></label>
+        <select class="form-control" id="sel1">
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+        </select>
+    </div>
+
+    <button type="submit" id="btnSubmit" class="btn btn-primary">Check eligibility</button>
+    <a class="btn btn-secondary" data-toggle="modal" data-target="#cancelModal" href="#">Cancel</a>
+</form><div tabindex="0" id="cancelModal" class="modal fade" role="dialog" aria-describedby="modal-body" aria-labelledby="modal-title">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 id="modal-title" class="modal-title">Are you sure you want to cancel?</h4>
+            </div>
+            <div id="modal-body" class="modal-body">
+                <p>Any data you have entered will not be saved.</p>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary" href="/Home/Index">Yes</a>
+                <button type="button" class="btn btn-link" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <hr />
+        <footer>
+            <p>&copy; 2017 - My ASP.NET Application .NET Framework 4.5 MVC 5.2.3</p>
+        </footer>
+    </div>
+
+    <script src="Scripts/jquery-3.1.0.js"></script>
+
+    <script src="Scripts/jquery.validate.js"></script>
+<script src="Scripts/jquery.validate.unobtrusive.js"></script>
+
+    <script src="Scripts/bootstrap.js"></script>
+<script src="Scripts/respond.js"></script>
+
+    <script src="Scripts/customvalidate-bootstrap.js"></script>
+
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+        });
+
+    </script>
+
+</body>
+</html>
