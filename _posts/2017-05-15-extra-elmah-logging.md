@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Extra Elmah logging"
-date:   2017-05-15
+date:   2017-05-15 16:16:01 -0600
 ---
 
 I need to have Elmah log potentially dangerous Request.Form values caught by HttpRequestValidationException.
@@ -21,50 +21,48 @@ I found a blog post from way back detailing how to do this [here](http://www.how
 And it didn’t work… After puzzling over it for a while I realised what I was doing wrong.  The example shows the RegisterGlobalFilters as part of the Global.asax.cs file.  It’s actually in the FilterConfig.cs file.  I think this post from 2012 shows the way Visual Studio USED to set up an MVC project.  I’ve actually been caught out by this before when trying to add to the RegisterRoutes method.  I should have realised what was going on sooner, but I guess I was tired yesterday… This morning when trying to work out why my new exception filter was not being hit, I saw that there already was a RegisterGlobalFilters method being called above where I was trying to do mine.
 
 My Global.asax.cs looks like this
-{% highlight csharp  %}
-        
-    protected void Application_Start()
-    {
-        //Disable response header
-        MvcHandler.DisableMvcResponseHeader = true;
 
-        AreaRegistration.RegisterAllAreas();
-        FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-        RouteConfig.RegisterRoutes(RouteTable.Routes);
-        BundleConfig.RegisterBundles(BundleTable.Bundles);
-    }
+{% highlight csharp  %}
+protected void Application_Start()
+{
+    //Disable response header
+    MvcHandler.DisableMvcResponseHeader = true;
+
+    AreaRegistration.RegisterAllAreas();
+    FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+    RouteConfig.RegisterRoutes(RouteTable.Routes);
+    BundleConfig.RegisterBundles(BundleTable.Bundles);
+}
 {% endhighlight %}
 
 I added this code to the FilterConfig.cs
 
 {% highlight csharp  %}
-        
-    public static void RegisterGlobalFilters(GlobalFilterCollection filters)
-    {
-        filters.Add(new ElmahRequestValidationErrorFilter());
-        filters.Add(new HandleErrorAttribute());
-    }
+public static void RegisterGlobalFilters(GlobalFilterCollection filters)
+{
+    filters.Add(new ElmahRequestValidationErrorFilter());
+    filters.Add(new HandleErrorAttribute());
+}
 {% endhighlight %}
 
 And this is the new exception filter
 {% highlight csharp  %}
-        
-    using System.Web;
-    using System.Web.Mvc;
+using System.Web;
+using System.Web.Mvc;
 
-    namespace DBDRVWebsite.Web.Filters
+namespace DBDRVWebsite.Web.Filters
+{
+    public class ElmahRequestValidationErrorFilter : IExceptionFilter
     {
-        public class ElmahRequestValidationErrorFilter : IExceptionFilter
+        public void OnException(ExceptionContext filterContext)
         {
-            public void OnException(ExceptionContext filterContext)
+            if (filterContext.Exception is HttpRequestValidationException)
             {
-                if (filterContext.Exception is HttpRequestValidationException)
-                {
-                    Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(filterContext.Exception));
-                }
+                Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(filterContext.Exception));
             }
         }
     }
+}
 {% endhighlight %}
 
 I stored it as a class in a new Filters folder.  In the future there may be more custom filters, and this is how the demo project is structured in the [ASP.NET MVC 4 Custom Action Filters](https://docs.microsoft.com/en-us/aspnet/mvc/overview/older-versions/hands-on-labs/aspnet-mvc-4-custom-action-filters) tutorial, so it seemed like a good way to go.
@@ -76,7 +74,7 @@ Throwing a bit of dodgy code into one of my text boxes sent me to the custom err
     <tr>
       <td style="text-align: left">500</td>
       <td style="text-align: left"><strong>HttpRequestValidation</strong></td>
-      <td style="text-align: left">A potentially dangerous Request.Form value was detected from the client (Comments="<code>").</td>
+      <td style="text-align: left">A potentially dangerous Request.Form value was detected from the client (Field_Name="bad code here").</td>
     </tr>
   </tbody>
 </table>
