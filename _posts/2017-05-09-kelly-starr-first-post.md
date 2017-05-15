@@ -3,7 +3,7 @@ layout: post
 title: "Welcome to my blog"
 date: 2017-05-09
 ---
-
+<hr>
 Well, getting this blog set up hasn’t been easy!
 
 I thought on a whim to create a place to chuck all the programming issues I am dealing with, to refer back to later, and possibly to help someone else, or even get some help from a random internet traveller, but it turned out to be a bigger project that I thought.  Using Github pages seemed like a good idea (and I am still feeling very positive about it) but I had a surprising amount of trouble getting it all set up.  Crazy after some of the complicated issues I deal with at work, but deploying a blog would give me so much trouble!  Also, can people even comment?  Hmmm…
