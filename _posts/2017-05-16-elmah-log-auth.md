@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Configure Elmah web error log for authorised access only"
+title:  "Configure Elmah UI authorised access only"
 date:   2017-05-16
 ---
 
@@ -17,12 +17,3 @@ I didn’t want to set the access to elmah.axd to remote only, because I have no
 For now though I guess the ‘login to the error screen’ thing will have to be put on hold, because I don’t have time to implement authentication just for this one screen.  There’s also no database, which makes authentication even trickier.  Either we accept the risks of anyone being able to type /elmah and have a look, or no one can see it.
 
 I will report this back to the developer who does the Azure deployments, and he can decide.
-
-<div class="PageNavigation">
-  {% if page.previous.url %}
-    <a class="prev" href="{{page.previous.url}}">&laquo; {{page.previous.title}}</a>
-  {% endif %}
-  {% if page.next.url %}
-    <a class="next" href="{{page.next.url}}">{{page.next.title}} &raquo;</a>
-  {% endif %}
-</div>
