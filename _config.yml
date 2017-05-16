@@ -1,2 +1,4 @@
 theme: jekyll-theme-hacker
 markdown: kramdown
+# Google services
+google_analytics: UA-99240410-1
