@@ -31,7 +31,7 @@ Possibly once the folder is created I can change the ‘Delete additional files�
 
 Here are the steps taken:
 
-Web.Config needs a few Elmah error log entries in system.Webserver.  The one in modules was already there, I added the one in the elmah section  I created a folder called Elmah in my App_Data directory, and set it as the logPath.
+Web.Config needs a few Elmah error log entries in system.Webserver.  The one in modules was already there, I added the one in the elmah section.  I created a folder called Elmah in my App_Data directory, and set it as the logPath.
 
 {% highlight xml  %}
 <modules>
@@ -46,7 +46,7 @@ Web.Config needs a few Elmah error log entries in system.Webserver.  The one in 
 </elmah>
 {% endhighlight %} 
 
-That's it!  I ran the site and thre a 404 error to test, and an XML file ended up in the folder!  It's the same as the full details you see in the web UI when you click on Raw/Source data in XML (IE, ugly).
+That's it!  I ran the site and threw a 404 error to test, and an XML file ended up in the folder!  It's the same as the full details you see in the web UI when you click on Raw/Source data in XML (IE, ugly).
 
 {% highlight xml  %}
 <error errorId="c56d88eb-e87d-4597-8173-e9bf5670751d" application="/LM/W3SVC/2/ROOT" host="MY_PC" type="System.Web.HttpException" 
@@ -68,3 +68,12 @@ I guess when you have admin access in Azure you go log in, open App Service Edit
 Opposite to my ‘will I lose the files when I publish’ problem, I don’t want to end up in a situation where they build up forever, and eventually the space runs out.  I have seen this before!  It took about 10 months of some kind of extreme logger that someone forgot to turn off before the server filled up and mysteriously stopped working.  No one seemed to know who had activated the logging, or why…  
 
 But anyway.  I think it would be a good idea to have a way to automatically monitor this folder, and empty it, or copy the files somewhere else, from time to time.  I think possibly an Azure Webjob could do this work.  I know absolutely nothing about this, but it could be a good chance to learn. 
+
+<div class="PageNavigation">
+  {% if page.previous.url %}
+    <a class="prev" href="{{page.previous.url}}">&laquo; {{page.previous.title}}</a>
+  {% endif %}
+  {% if page.next.url %}
+    <a class="next" href="{{page.next.url}}">{{page.next.title}} &raquo;</a>
+  {% endif %}
+</div>
