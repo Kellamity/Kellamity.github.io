@@ -11,9 +11,10 @@ This is part of my ongoing Elmah improvements listed [here]({{ site.baseurl }}{%
 ## Where to log?
 
 I figured the App_Data folder was a good place to store this sort of thing.  There’s a couple of concerns though.
-<ul><li>
-Is it included in the build?</li>
-<li>Will it get wiped with each new build?</li></ul>
+<ul>
+<li>Is it included in the build?</li>
+<li>Will it get wiped with each new build?</li>
+</ul>
 
 The publish profile already has a 
 
@@ -67,13 +68,4 @@ I guess when you have admin access in Azure you go log in, open App Service Edit
 
 Opposite to my ‘will I lose the files when I publish’ problem, I don’t want to end up in a situation where they build up forever, and eventually the space runs out.  I have seen this before!  It took about 10 months of some kind of extreme logger that someone forgot to turn off before the server filled up and mysteriously stopped working.  No one seemed to know who had activated the logging, or why…  
 
-But anyway.  I think it would be a good idea to have a way to automatically monitor this folder, and empty it, or copy the files somewhere else, from time to time.  I think possibly an Azure Webjob could do this work.  I know absolutely nothing about this, but it could be a good chance to learn. 
-
-<div class="PageNavigation">
-  {% if page.previous.url %}
-    <a class="prev" href="{{page.previous.url}}">&laquo; {{page.previous.title}}</a>
-  {% endif %}
-  {% if page.next.url %}
-    <a class="next" href="{{page.next.url}}">{{page.next.title}} &raquo;</a>
-  {% endif %}
-</div>
+But anyway.  I think it would be a good idea to have a way to automatically monitor this folder, and empty it, or copy the files somewhere else, from time to time.  I think possibly an Azure Webjob could do this work.  I know absolutely nothing about this, but it could be a good chance to learn.
