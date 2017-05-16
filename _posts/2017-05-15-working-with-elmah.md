@@ -16,8 +16,8 @@ Tasks:
 <ul>
 <li><a href="https://kellamity.github.io/2017/05/15/extra-elmah-logging.html">Have Elmah log potentially dangerous Request.Form values caught by HttpRequestValidationException</a></li>
 <li><a href="https://kellamity.github.io/2017/05/16/elmah-log-auth.html">Configure Elmah web error log for authorised access only</a></li>
+<li><a href="https://kellamity.github.io/2017/05/16/elmah-log-files.html">Have Elmah log error files to folder</a></li>
 <li>Have Elmah send errors out via email</li>
-<li>Have Elmah log error files to folder</li>
 <li>Find a way to monitor above folder and archive/delete files over a certain age</li>
 </ul>
 
