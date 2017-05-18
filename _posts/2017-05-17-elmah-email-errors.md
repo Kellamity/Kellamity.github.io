@@ -69,27 +69,33 @@ Then you just need to tell Elmah that you wish to use those settings.  In the El
 
 {% highlight xml  %}
 <elmah>
-    <errorMail from="sender@email.com" to="group@email.com" async="true" smtpServer="outgoing.smtp.com" smtpPort="0" useSsl="true" />
+    <errorMail from="sender@email.com" to="group@email.com" async="true" smtpServer="outgoing.smtp.com" useSsl="true" />
 </elmah>
 {% endhighlight %}
-
-You’ll notice I never set the port here, and it still works. Some of the values may be unnecessary in this line, if they are in the mailSettings section.
 
 ## Customising the email
 
 This is all you need to have the emails send, but it’s also possible to customise them a little.  By default they have a subject of ‘Error (exception): Exception message’.  This is ok but as I will have emails going to the same place from each environment I would like to know if the error is coming from dev, test, uat or prod without having to read the details.
 
-There’s a way to hook into the ErrorMailModule’s Mailing method.  You can do a lot here like add extra recipients in the CC field, edit the body etc. but I am just interested in editing the subject for now.  Instead of the default I want to know the hostname, and the type of exception.  This should make it a bit easier to sort the mailbox, and quickly gage what is going on.  I added this method to the Global.asax file:
+There’s a way to hook into the ErrorMailModule’s Mailing method.  You can do a lot here like add extra recipients in the CC field, edit the body etc. but I am just interested in editing the subject for now.  Instead of the default I want to know the environment, and the type of exception.  This should make it a bit easier to sort the mailbox, and quickly gage what is going on.  I added this method to the Global.asax file:
 
 {% highlight csharp  %}
 void ErrorMail_Mailing(object sender, Elmah.ErrorMailEventArgs e)
 {
-    var hostName = e.Error.HostName;
+    var deploymentName = System.Configuration.ConfigurationManager.AppSettings["deploymentName"];
     var errorType = e.Error.Type;
-    e.Mail.Subject = hostName + ": " + errorType;
+    e.Mail.Subject = deploymentName + ": " + errorType;
 }
 {% endhighlight %}
 
-Now I get an email with a subject that reads ‘HOSTNAME: Exception type’.
+and put a new key in the web.config for deploymentName and in each of my build configuration transforms.
+
+{% highlight xml  %}
+  <appSettings>
+    <add key="deploymentName" value="local" />
+  </appSettings>
+{% endhighlight %}
+
+Now I get an email with a subject that reads ‘Deployment name: Exception type’.
 
 In testing some of the emails are delayed in arriving, but I think I can safely blame Lotus Notes for that.
