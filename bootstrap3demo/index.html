@@ -99,14 +99,58 @@
             <div aria-live="assertive" class="alert alert-warning" data-warnmsg-for="Question5" data-warnmsg-trigger="" id="divQuestion5Warning"><p><span class="glyphicon glyphicon-alert"></span><strong>Warning!</strong></p><p>Warning message to user, the selection you just made has triggered this extra thing for you to read.</p></div>
         </div>
     </fieldset>
+        <div class="form-group" role="group" aria-labelledby="lbSelectedItems">
+        <span class="field-validation-valid" data-valmsg-for="SelectedItems" data-valmsg-replace="true" role="alert"></span>
+        
+            <label for="SelectedItems" id="lbSelectedItems" class="control-label">How many things do you want to select?</label>
+            <p class="form-text text-muted">Select other to enter more details.</p>
+
+        
+        
+            <div class="checkbox">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" name="SelectedItems" id="SelectedItemsThing1" data-val-requiredcheckboxgroup="Please provide an answer for How many things do you want to select?" data-val="true" value="Thing1"> Thing 1
+                </label>
+                <p class="help-block">Including things like thing 1.</p>
+            </div>
+            <div class="checkbox">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" name="SelectedItems" id="SelectedItemsThing2" value="Thing2"> Thing 2
+                </label>
+                <span class="help-block">Not quite like thing 1.</span>
+            </div>
+            <div class="checkbox">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" name="SelectedItems" id="SelectedItemsThing3" value="Thing3"> Thing 3
+                </label>
+            </div>
+            <div class="checkbox">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" name="SelectedItems" id="SelectedItemsThing4" value="Thing4"> Thing 4
+                </label>
+            </div>
+            <div class="checkbox">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" name="SelectedItems" id="SelectedItemsThingOther" value="ThingOther" onchange="hideShow(this)"> Other
+                </label>
+            </div>
+        
+        <span class="field-validation-valid" data-valmsg-for="SelectedItems" data-valmsg-replace="true" role="alert"></span>
+    </div>
+    <div class="form-group" style="display:none" id="divSelectedItemsChild">
+        <label class="control-label" for="DisputeOtherDetails">If other, provide details</label>
+            
+            <textarea aria-describedby="txtDisputeOtherDetails" class="form-control"  data-val="true" data-val-maxlength="Please provide an answer for this question that is 2000 characters or less" data-val-maxlength-max="2000" data-val-requiredifenabled="The If other, provide details field is required." id="DisputeOtherDetails" name="DisputeOtherDetails" rows="5"></textarea>
+        <span class="field-validation-valid" data-valmsg-for="DisputeOtherDetails" data-valmsg-replace="true" role="alert"></span>
+    </div>
     <div class="form-group">
         <label for="sel1" class="control-label legend">This control has a label that looks like the fieldset legends <span class="small text-muted">Optional</span></label>
         <select class="form-control" id="sel1">
             <option></option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
+            <option>Value1</option>
+            <option>Value2</option>
+            <option>Value3</option>
+            <option>Value4</option>
         </select>
     </div>
 
@@ -145,7 +189,7 @@
 <script src="Scripts/respond.js"></script>
 
     <script src="Scripts/customvalidate-bootstrap.js"></script>
-
+<script src="/Scripts/customvalidators.js"></script>
     
     <script type="text/javascript">
         $(document).ready(function () {
@@ -176,6 +220,26 @@
                 }
             $('#progApplication').css({ "width": prog + '%' });
         }
+                    function hideShow(checkbox) {
+                var isChecked = checkbox.checked;
+                //search for hidden div
+                var hiddenDiv = document.getElementById('div' + checkbox.name + 'Child');
+                if (checkbox.checked) {
+                    hiddenDiv.style.display = '';
+                }
+                if (!checkbox.checked) {
+                    //also clear value
+                    if ($('#DisputeOtherDetails').val()) {
+                        console.log('field has value');
+                        var countSpan = $('#spDisputeOtherDetailsCounter');
+                        countSpan.text('2000');
+                        countSpan.css("color", "#333");
+                        $('#DisputeOtherDetails').val('');
+                        $('#DisputeOtherDetails').valid();
+                    }
+                    hiddenDiv.style.display = 'none';
+                }
+            }
     </script>
 
 </body>
